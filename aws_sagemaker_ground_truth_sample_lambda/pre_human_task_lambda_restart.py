@@ -65,23 +65,22 @@ def lambda_handler(event, context):
     # if source field present, take that otherwise take source-ref
     task_object = source if source is not None else source_ref
 
+    humanAnnotationRequired = "true"
     if "initial-annotation-job" in event['dataObject']:
-        annotation_js = json.loads(
-            event['dataObject']['initial-annotation-job']['annotationsFromAllWorkers'][0]['annotationData']['content'])
-        initial_value = annotation_js['boundingBox']['boundingBoxes']
+        humanAnnotationRequired = "true" if "failure-reason" in event['dataObject']['[initial-annotation-job'] else "false"
     else:
         initial_value = None
+
+
 
     # Build response object
     output = {
         "taskInput": {
             "taskObject": task_object
+            "initial_value" :
         },
-        "humanAnnotationRequired": "true"
+        "humanAnnotationRequired": humanAnnotationRequired
     }
-
-    if initial_value is not None:
-        output['taskInput']['initial_value'] = initial_value
 
     print(output)
     # If neither source nor source-ref specified, mark the annotation failed

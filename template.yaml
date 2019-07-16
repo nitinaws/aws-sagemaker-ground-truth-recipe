@@ -17,6 +17,13 @@ Resources:
             Handler: pre_human_task_lambda.lambda_handler
             Runtime: python3.6
 
+    GtRecipePreHumanRestartTaskFunction:
+      Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+      Properties:
+        CodeUri: aws_sagemaker_ground_truth_sample_lambda/
+        Handler: pre_human_task_lambda_restart.lambda_handler
+        Runtime: python3.6
+
     GtRecipeAnnotationConsolidationFunction:
         Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
         Properties:
